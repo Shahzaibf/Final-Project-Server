@@ -15,6 +15,27 @@ const Student = db.define("student", {
   lastname: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
+  },
+
+  imageUrl: {
+    type: Sequelize.STRING,
+  },
+
+  gpa: {
+    type: Sequelize.FLOAT(),
+    validgpa(value) {
+      if( value > 4.0 || value < 0.0 ) {
+        throw new Error('Not a valid gpa.');
+      }
+    }
   }
 });
 
